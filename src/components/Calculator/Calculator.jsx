@@ -39,7 +39,7 @@ const Calculator = () => {
                 <option value="divide">/</option>
             </select>
             <input type= 'number' name='numberTwo' onChange={(event) => {setNumberTwo(event.target.value)}}/>
-            <button type='submit' name='answer' onclick={setAnswer(calculation(numberOne, numberTwo, operator))}>=</button>
+            <button name='answer' onClick={(event) => {setAnswer(calculation(numberOne, numberTwo, operator))}}>=</button>
             {
                 answer ? <div className='answer'>{answer}</div> : null
             }
