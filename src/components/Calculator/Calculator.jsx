@@ -5,7 +5,7 @@ const calculation = (numberOne, numberTwo, operator) => {
     
     if (!numberOne || !numberTwo) {
         response = "Please provide a valid number for both operands"
-        return response
+        return <div className='error'> {response} </div>
     }
 
     if (operator === 'add') {
@@ -17,7 +17,7 @@ const calculation = (numberOne, numberTwo, operator) => {
     } else if (operator === 'divide') {
         response = Number(numberOne) / Number(numberTwo)
     } else {
-        response = "Please select an operator"
+        return <div className='error'>Please select an operator</div>
     }
 
     return response
@@ -30,9 +30,10 @@ const Calculator = () => {
     const [answer, setAnswer] = useState('')
     
     return (
-        <>
+        <div className='Calculator'>
             <input type= 'number' name='numberOne' onChange={(event) => {setNumberOne(event.target.value)}}/>
-            <select onChange={(event) => {setOperator(event.target.value)}}>
+            <select defaultValue='' onChange={(event) => {setOperator(event.target.value)}}>
+                <option value="default"> </option>
                 <option value="add">+</option>
                 <option value="subtract">-</option>
                 <option value="multiply">*</option>
@@ -40,10 +41,9 @@ const Calculator = () => {
             </select>
             <input type= 'number' name='numberTwo' onChange={(event) => {setNumberTwo(event.target.value)}}/>
             <button name='answer' onClick={(event) => {setAnswer(calculation(numberOne, numberTwo, operator))}}>=</button>
-            {
-                answer ? <div className='answer'>{answer}</div> : null
-            }
-        </>
+            <input type='number' value= {answer}/>
+            { typeof(answer) !== 'number' ? <div className='answer'>{answer}</div> : null }
+        </div>
     )
 }
 
